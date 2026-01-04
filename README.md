@@ -1,34 +1,34 @@
-### 6.7 Procesamiento de columnas JSON con Circe
+## 6.7 Procesamiento de columnas JSON con Circe
 
-Para el análisis de columnas en formato JSON se utilizó la librería Circe.
-Se trabajó con un archivo JSON reducido que representa la columna `crew`
-del dataset original.
+Para el análisis de columnas en formato JSON se utilizó la librería **Circe**, una herramienta funcional para el manejo de JSON en Scala.  
+El trabajo se realizó sobre una muestra representativa de la columna **crew** del dataset `pi_movies_complete`.
 
-El proceso incluyó:
-- Lectura del archivo JSON
-- Decodificación a clases Scala
-- Limpieza de registros con campos vacíos
-- Presentación de resultados válidos
+Debido a que el dataset original contiene columnas JSON extensas, se empleó un archivo JSON reducido, lo que permitió enfocarse en el aprendizaje del uso de Circe sin afectar el rendimiento del sistema.
 
-Este enfoque permitió comprender el manejo de datos semi-estructurados
-sin necesidad de procesar el dataset completo.
+---
 
-Descripción general
+### Objetivo
 
-En esta actividad se realizó el procesamiento de datos en formato JSON utilizando la librería Circe, una herramienta funcional para el manejo de JSON en Scala.
-El objetivo fue comprender el tratamiento de columnas semi-estructuradas del dataset pi_movies_complete, específicamente la columna crew, aplicando técnicas de lectura, limpieza y análisis de datos.
+- Utilizar la librería Circe para procesar archivos JSON en Scala  
+- Decodificar estructuras JSON a clases Scala  
+- Aplicar limpieza de datos  
+- Documentar el proceso y los resultados obtenidos  
 
-Dado que el dataset original contiene columnas JSON extensas, se trabajó con un archivo JSON reducido, lo que permitió enfocar el análisis en el aprendizaje del uso de Circe sin afectar el rendimiento del sistema.
+---
 
-Paso 1: Preparación del archivo JSON
+### Paso 1: Preparación del archivo JSON
 
-Se creó un archivo JSON pequeño que representa una muestra de la columna crew del dataset original.
-Este archivo contiene tanto registros válidos como registros incompletos, con el fin de aplicar procesos de limpieza de datos.
+Se creó un archivo JSON pequeño que representa una muestra de la columna `crew` del dataset original.  
+Este archivo contiene registros válidos e incompletos para aplicar procesos de limpieza de datos.
 
-Archivo: src/main/resources/data/crew.json
+**Ruta del archivo:**
 
-Ejemplo de estructura:
+src/main/resources/data/crew.json
 
+
+**Estructura de ejemplo:**
+
+```json
 [
   {
     "id": 1,
@@ -49,8 +49,9 @@ Ejemplo de estructura:
     "name": ""
   }
 ]
+```
 
-Paso 2: Configuración de dependencias
+### Paso 2: Configuración de dependencias
 
 Para el manejo de JSON en Scala se incorporaron las siguientes dependencias en el archivo build.sbt:
 ```scala
@@ -68,7 +69,7 @@ Manejar errores de forma segura
 
 Trabajar bajo un enfoque funcional
 
-Paso 3: Definición del modelo de datos
+### Paso 3: Definición del modelo de datos
 
 Se definió una clase de dominio que representa la estructura de cada elemento de la columna crew:
 ```scala
@@ -81,7 +82,7 @@ case class CrewMember(
 ```
 Este modelo permite mapear directamente los datos del archivo JSON a objetos Scala tipados.
 
-Paso 4: Lectura y decodificación del archivo JSON
+### Paso 4: Lectura y decodificación del archivo JSON
 
 El archivo JSON fue leído desde el sistema de archivos y posteriormente decodificado utilizando Circe.
 
@@ -95,7 +96,7 @@ Manejo de posibles errores de parsing.
 
 Este enfoque garantiza una lectura segura de datos semi-estructurados.
 
-Paso 5: Limpieza de datos
+### Paso 5: Limpieza de datos
 
 Una vez decodificados los datos, se aplicó un proceso de limpieza con los siguientes criterios:
 
@@ -146,7 +147,7 @@ object CirceCrewExample extends App {
 }
 ```
 
-Paso 6: Presentación de resultados
+### Paso 6: Presentación de resultados
 
 Finalmente, se mostraron los resultados obtenidos después de la limpieza:
 
@@ -164,7 +165,7 @@ Este análisis permitió observar cómo Circe facilita el manejo y validación d
 
 
 
-Conclusión
+### Conclusión
 
 El uso de la librería Circe permitió:
 
