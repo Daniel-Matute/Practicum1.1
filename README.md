@@ -16,6 +16,96 @@ Debido a que el dataset original contiene columnas JSON extensas, se empleó un 
 
 ---
 
+### Usar cualquier JSON pequeño para aprender circe 
+
+ Estructura de ejmplo:
+
+ ```json
+[
+  {
+    "id": 1,
+    "job": "Director",
+    "department": "Directing",
+    "name": "Christopher Nolan"
+  },
+  {
+    "id": 2,
+    "job": "Producer",
+    "department": "Production",
+    "name": "Emma Thomas"
+  },
+  {
+    "id": 3,
+    "job": "",
+    "department": "Production",
+    "name": ""
+  }
+]
+```
+### Usar en algunas columnas JSON  para obtener datos. 
+
+Se definió una clase de dominio que representa la estructura de cada elemento de la columna crew:
+```scala
+case class CrewMember(
+  id: Int,
+  job: String,
+  department: String,
+  name: String
+)
+```
+```scala
+import io.circe.*
+import io.circe.generic.auto.*
+import io.circe.parser.*
+
+import scala.io.Source
+
+object CirceCrewExample extends App {
+
+  val path = "src/main/resources/data/crew.json"
+
+  // 1. Lectura del archivo JSON
+  val jsonString = Source.fromFile(path).getLines().mkString
+
+  // 2. Decodificación del JSON
+  val decoded = decode[List[CrewMember]](jsonString)
+
+  decoded match {
+    case Left(error) =>
+      println(s"❌ Error al parsear JSON: $error")
+
+    case Right(crewList) =>
+
+      println(s"📥 Total de registros leídos: ${crewList.size}")
+
+      // 3. Limpieza de datos
+      val crewLimpio = crewList.filter(c =>
+        c.name.nonEmpty && c.job.nonEmpty
+      )
+
+      println(s"🧹 Registros válidos tras limpieza: ${crewLimpio.size}")
+
+      // 4. Resultados finales
+      println("\n🎬 CREW VÁLIDO:")
+      crewLimpio.foreach { c =>
+        println(s"- ${c.name} | ${c.job} | ${c.department}")
+      }
+  }
+}
+```
+Este código permite:
+
+Leer un archivo JSON completo desde el disco y cargarlo en memoria.
+
+Decodificar (Parsear) automáticamente el texto JSON a una lista de objetos Scala (List[CrewMember]).
+
+Manejar errores de forma segura, separando el éxito (Right) del fallo (Left) al leer el archivo.
+
+Filtrar y limpiar datos, descartando los registros que no tengan nombre o trabajo definido.
+
+Visualizar la información final procesada y limpia en la consola.
+
+
 ### Paso 1: Preparación del archivo 
 
 Usamos el data set pi_movies_complete como ruta para el manejo de datos
