@@ -1,3 +1,250 @@
+# ProyectoIntegrador_PFR
+Repositorio del proyecto integrador - Programación funcional y reactica
+
+  -Desarrollar los siguiente ítems
+
+
+  -Tablas de datos (nombre de columna, tipo, propósito y observaciones) - README.md
+
+  Entidad:Movies
+
+| Columna           | Tipo de dato  | Propósito                               | Observaciones                    |
+| ----------------- | ------------- | --------------------------------------- | -------------------------------- |
+| id                | Numérico (PK) | Identificador único de la película      | Clave primaria                   |
+| imdb_id           | Texto         | Identificador de la película en IMDb    | Puede contener valores nulos     |
+| title             | Texto         | Título comercial de la película         | Usado para visualización         |
+| original_title    | Texto         | Título en su idioma original            | Puede coincidir con `title`      |
+| overview          | Texto largo   | Descripción general de la trama         | Texto libre                      |
+| tagline           | Texto         | Frase promocional                       | Muchos valores nulos             |
+| status            | Texto         | Estado de la película (Released, etc.)  | Categoría controlada             |
+| release_date      | Fecha         | Fecha de estreno                        | Útil para análisis temporal      |
+| runtime           | Numérico      | Duración de la película en minutos      | Puede presentar valores atípicos |
+| budget            | Numérico      | Presupuesto de producción               | Alta presencia de valores nulos  |
+| revenue           | Numérico      | Recaudación obtenida                    | Valores nulos frecuentes         |
+| popularity        | Numérico      | Índice de popularidad                   | Métrica relativa                 |
+| vote_average      | Numérico      | Promedio de votaciones                  | Escala normalizada               |
+| vote_count        | Numérico      | Número total de votos                   | Relacionado con popularidad      |
+| adult             | Booleano      | Indica si es contenido para adultos     | Verdadero/Falso                  |
+| video             | Booleano      | Indica si es contenido en formato video | Poco frecuente                   |
+| original_language | Texto         | Idioma original de la película          | Código ISO 639-1                 |
+| homepage          | Texto         | Página web oficial                      | Mayormente nula                  |
+| poster_path       | Texto         | Ruta de la imagen promocional           | Uso visual                       |
+
+
+
+
+
+Entidad: PRODUCTION_COMPANIES
+
+| Columna      | Tipo          | Propósito                      | Observaciones     |
+| ------------ | ------------- | ------------------------------ | ----------------- |
+| company_id   | Numérico (PK) | Identificador de la productora | Clave primaria    |
+| company_name | Texto         | Nombre de la productora        | Texto descriptivo |
+
+
+
+
+Entidad: PRODUCTION_COUNTRIES
+
+| Columna      | Tipo  | Propósito       | Observaciones                    |
+| ------------ | ----- | --------------- | -------------------------------- |
+| country_code | Texto | Código del país | Basado en estándar internacional |
+| country_name | Texto | Nombre del país | Información descriptiva          |
+
+
+
+
+Entidad: LANGUAGES
+
+| Columna       | Tipo  | Propósito         | Observaciones     |
+| ------------- | ----- | ----------------- | ----------------- |
+| language_code | Texto | Código del idioma | Formato ISO 639-1 |
+| language_name | Texto | Nombre del idioma | Texto descriptivo |
+
+
+
+
+Entidad: GENRES
+
+| Columna    | Tipo          | Propósito                | Observaciones      |
+| ---------- | ------------- | ------------------------ | ------------------ |
+| genre_id   | Numérico (PK) | Identificador del género | Clave primaria     |
+| genre_name | Texto         | Nombre del género        | Categoría temática |
+
+
+
+
+Entidad: KEYWORDS
+
+| Columna      | Tipo          | Propósito                            | Observaciones     |
+| ------------ | ------------- | ------------------------------------ | ----------------- |
+| keyword_id   | Numérico (PK) | Identificador de la palabra clave    | Clave primaria    |
+| keyword_name | Texto         | Palabra clave asociada a la película | Texto descriptivo |
+
+
+
+
+Entidad: CAST
+
+| Columna        | Tipo          | Propósito               | Observaciones        |
+| -------------- | ------------- | ----------------------- | -------------------- |
+| cast_id        | Numérico (PK) | Identificador del actor | Clave primaria       |
+| actor_name     | Texto         | Nombre del actor        | Texto libre          |
+| character_name | Texto         | Personaje interpretado  | Puede repetirse      |
+| gender         | Numérico      | Género del actor        | Codificación interna |
+
+
+
+
+Entidad: CREW
+
+| Columna    | Tipo          | Propósito                            | Observaciones          |
+| ---------- | ------------- | ------------------------------------ | ---------------------- |
+| crew_id    | Numérico (PK) | Identificador del miembro del equipo | Clave primaria         |
+| crew_name  | Texto         | Nombre del miembro del equipo        | Texto libre            |
+| job        | Texto         | Rol desempeñado                      | Ej. Director, Producer |
+| department | Texto         | Área de trabajo                      | Categoría descriptiva  |
+
+
+
+
+Entidad: BELONGS_TO_COLLECTION
+
+| Columna         | Tipo          | Propósito                     | Observaciones  |
+| --------------- | ------------- | ----------------------------- | -------------- |
+| collection_id   | Numérico (PK) | Identificador de la colección | Clave primaria |
+| collection_name | Texto         | Nombre de la colección        | Puede ser nulo |
+| poster_path     | Texto         | Imagen de la colección        | Uso visual     |
+| backdrop_path   | Texto         | Imagen de fondo               | Opcional       |
+
+
+
+
+Entidad: RATINGS
+
+| Columna       | Tipo          | Propósito                 | Observaciones   |
+| ------------- | ------------- | ------------------------- | --------------- |
+| rating_id     | Numérico (PK) | Identificador del rating  | Clave primaria  |
+| rating_source | Texto         | Fuente de la calificación | Ej. usuarios    |
+| rating_value  | Numérico      | Valor del rating          | Escala numérica |
+
+
+
+ 5.2 Lectura de columnas numéricas
+
+ Lectura de columnas numéricas del dataset
+
+El dataset pi_movies_complete contiene varias columnas de tipo numérico que permiten analizar aspectos económicos, temporales y de popularidad de las películas. Estas variables son clave para realizar análisis estadísticos y comparativos posteriores.
+
+
+<img width="618" height="577" alt="image" src="https://github.com/user-attachments/assets/2f18798d-539e-4eb3-948e-2e80b2b49549" />
+
+<img width="644" height="533" alt="image" src="https://github.com/user-attachments/assets/1427f64d-637f-4f27-9bf2-2b7c7279dfab" />
+
+
+<img width="735" height="711" alt="image" src="https://github.com/user-attachments/assets/771e6d6c-6da3-469c-884b-e9d206289a42" />
+
+
+
+
+5.3 Análisis de datos en columnas numéricas (estadísticas básicas)
+
+ Análisis de datos en columnas numéricas
+
+Para comprender el comportamiento general de las variables numéricas del dataset pi_movies_complete, se realizó un análisis descriptivo utilizando estadísticas básicas como media, mediana, valores mínimos y máximos. Este análisis permite identificar patrones generales, dispersión de los datos y posibles valores atípicos.
+
+<img width="710" height="617" alt="image" src="https://github.com/user-attachments/assets/8eb87c4a-b08c-4838-a25c-c89807cc31b4" />
+
+<img width="646" height="679" alt="image" src="https://github.com/user-attachments/assets/a31c196c-083a-419b-99db-5e816bc31021" />
+
+
+5.4 Análisis de datos en columnas tipo texto (algunas col. - distribución de frecuencia). ja 
+  
+
+# Análisis de Variables de Texto (No Estructuradas)
+
+El dataset `pi_movies_complete` incluye diversas columnas de tipo texto que permiten describir características generales y contextuales de las películas. Estas variables no se utilizan para cálculos estadísticos directos, pero resultan fundamentales para el análisis descriptivo, la segmentación de datos y la identificación de patrones cualitativos.
+
+Para este análisis se consideran únicamente columnas de texto simples y se excluyen aquellas que almacenan información estructurada en formato JSON, como géneros, reparto, países de producción o palabras clave.
+
+Las principales columnas de tipo texto analizadas son las siguientes:
+
+---
+
+### Idioma original (`original_language`)
+Esta columna indica el idioma original de la película, representado mediante códigos normalizados ISO 639-1. El análisis de distribución de frecuencia muestra una clara concentración en el idioma inglés, lo que refleja la fuerte presencia de la industria cinematográfica anglosajona dentro del dataset.
+
+No obstante, también se identifican películas en otros idiomas como francés, alemán, italiano, japonés y español, lo que evidencia una diversidad lingüística.
+
+### Fechas de estreno (`release_date`)
+La columna de fechas de estreno corresponde a un atributo textual que posteriormente puede transformarse a tipo fecha. El análisis de frecuencia por año muestra que las películas abarcan un periodo histórico amplio, desde finales del siglo XIX hasta producciones recientes del siglo XXI.
+
+Se observa un aumento progresivo en la cantidad de registros a partir de la segunda mitad del siglo XX, con una mayor concentración en las últimas décadas.
+
+### Estado de la película (`status`)
+Esta variable categórica indica el estado de producción de la película. La distribución de frecuencia evidencia que la gran mayoría de los registros se encuentran en estado **Released**, mientras que una proporción menor corresponde a estados como **Post Production** o **In Production**.
+
+### Clasificación de contenido (`adult`)
+Aunque se trata de una variable booleana, su análisis se realiza como una categoría textual. La distribución muestra que la gran mayoría de las películas no están clasificadas como contenido para adultos, mientras que solo un porcentaje muy reducido pertenece a esta categoría.
+
+### Presencia en línea (`homepage`)
+Esta columna indica si la película cuenta con un sitio web oficial. El análisis muestra que una proporción significativa de registros presenta valores nulos, lo cual es común en películas antiguas o producciones con menor difusión comercial.
+
+### Títulos de la película (`title` - `original_title`)
+Ambas columnas corresponden a atributos nominales utilizados para identificar la película.
+* El campo `title` representa el título comercial.
+* Mientras que `original_title` conserva el título en el idioma original.
+
+### Descripción y elementos promocionales (`overview` - `tagline`)
+Estas columnas almacenan texto libre de longitud variable.
+* `overview` contiene una descripción general de la trama.
+* `tagline` corresponde a una frase promocional asociada a la película.
+
+### Recursos visuales y enlaces (`poster_path`)
+Estas columnas contienen rutas o enlaces asociados a material visual o informativo.
+* `poster_path` almacena la ruta de la imagen promocional.
+* `homepage` indica la existencia de un sitio web oficial.
+
+### Indicador de formato (`video`)
+Aunque es una variable booleana, se trata como categórica textual. Su frecuencia indica si una película fue distribuida principalmente en formato video.
+
+<img width="637" height="580" alt="image" src="https://github.com/user-attachments/assets/4501432a-dbf3-488e-abdb-523ee22fb969" />
+
+<img width="645" height="383" alt="image" src="https://github.com/user-attachments/assets/94ec416a-f838-4178-8964-4e25f6a3152b" />
+
+<img width="634" height="562" alt="image" src="https://github.com/user-attachments/assets/97165b45-3bf0-462b-b97f-094f960ca7f0" />
+
+<img width="631" height="404" alt="image" src="https://github.com/user-attachments/assets/85b55967-59a3-446b-94d6-482621dbdde3" />
+
+<img width="641" height="712" alt="image" src="https://github.com/user-attachments/assets/2e3569e5-d8d5-4602-9494-521d7dd4636f" />
+
+<img width="639" height="231" alt="image" src="https://github.com/user-attachments/assets/92cf7a63-49a5-43ee-8379-7bc0dbeca5ed" />
+
+
+
+5.5 Limpieza de datos (columnas con valores nulos, valores atípicos, etc.) 
+
+
+<img width="642" height="431" alt="image" src="https://github.com/user-attachments/assets/f752f07d-2bcf-4a73-a326-db5212142e48" />
+
+<img width="668" height="522" alt="image" src="https://github.com/user-attachments/assets/50a68bd1-47a2-49c1-837f-393e3997b8e3" />
+
+<img width="639" height="646" alt="image" src="https://github.com/user-attachments/assets/d4dcf024-cc6d-4c11-ae8d-e4cfd3a357fc" />
+<img width="646" height="279" alt="image" src="https://github.com/user-attachments/assets/a057fcfc-8b26-4a4a-a9e1-34c449194c70" />
+<img width="643" height="698" alt="image" src="https://github.com/user-attachments/assets/fe0f2ca2-2814-4998-bcf0-1be3955667f2" />
+
+<img width="643" height="249" alt="image" src="https://github.com/user-attachments/assets/5d6853f8-3e6d-4d2d-8076-d217dd7bc37e" />
+
+<img width="644" height="671" alt="image" src="https://github.com/user-attachments/assets/7014c603-9287-4c2b-910c-4a07ab36dac0" />
+
+  <img width="619" height="275" alt="image" src="https://github.com/user-attachments/assets/a7d119ae-1240-4216-b7f2-8eaed1d8c79a" />
+
+
+<img width="645" height="651" alt="image" src="https://github.com/user-attachments/assets/55bbda2f-5f40-4424-9de3-abc40bf8b23a" />
+
+
+### Avance 2
+
 ## 6.7 Procesamiento de columnas JSON con Circe
 
 Para el análisis de columnas en formato JSON se utilizó la librería **Circe**, una herramienta funcional para el manejo de JSON en Scala.  
@@ -460,5 +707,8 @@ CREW
 NO JSON
 
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9b04ffb3-ca71-4cef-b025-e6ee520b9670" />
+
+
+
 
 
